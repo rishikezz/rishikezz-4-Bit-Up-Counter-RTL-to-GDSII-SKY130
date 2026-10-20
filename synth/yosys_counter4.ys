@@ -1,0 +1,6 @@
+read_verilog -sv rtl/counter4.sv
+hierarchy -check -top counter4
+synth -top counter4 -flatten
+stat
+write_verilog -noattr synth/counter4_generic.v
+show -format svg -prefix synth/counter4_generic

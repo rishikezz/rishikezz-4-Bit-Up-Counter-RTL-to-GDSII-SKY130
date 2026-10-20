@@ -1,0 +1,18 @@
+read_liberty -lib /home/sanjay/.volare/volare/sky130/versions/0fe599b2afb6708d281543108caf8310912f54af/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog -sv rtl/counter4.sv
+hierarchy -check -top counter4
+
+synth -top counter4 -flatten -noabc
+
+techmap
+opt
+dfflibmap -liberty /home/sanjay/.volare/volare/sky130/versions/0fe599b2afb6708d281543108caf8310912f54af/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+abc -liberty /home/sanjay/.volare/volare/sky130/versions/0fe599b2afb6708d281543108caf8310912f54af/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+clean
+check
+stat -liberty /home/sanjay/.volare/volare/sky130/versions/0fe599b2afb6708d281543108caf8310912f54af/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+write_verilog -noattr synth/counter4_sky130.v
+write_json synth/counter4_sky130.json
+show -format svg -prefix synth/counter4_sky130
